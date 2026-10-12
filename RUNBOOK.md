@@ -80,7 +80,7 @@ PC・Claudeアプリ・各サイト・GitHub のどれかにつながらず更�
 
 | ファイル | 役割 |
 |---|---|
-| `index.html`, `assets/` | サイト本体（表示と絞り込み） |
+| `index.html`, `assets/` | サイト本体（表示と絞り込み）。`assets/` を直したら、`index.html` の `?v=` を新しい値にする（古いJSがキャッシュに残って新しい data.json を読めなくなるのを防ぐ） |
 | `data.json` | 表示データ。`build_data.py` が生成する。手で編集しない。各行は配列で、並びは `cols`（`build_data.py` の `COLS`） |
 | `sprites/sheets/*.webp` | カード画像（240×135 を横10列に並べたもの） |
 | `sprites/registry.json` | カードページURL → スプライトの位置 |
