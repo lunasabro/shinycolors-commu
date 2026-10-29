@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noimageindex">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>シャニマスコミュ総覧</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@600;900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="assets/style.css?v=2026102502">
+</head>
+<body>
+
+
+<div class="wrap">
+  <header class="mast">
+    <div>
+      <h1>シャニマスコミュ総覧</h1>
+      <p class="sub">プロデュース／サポートアイドル・イベント・シナリオのコミュを、実装日の新しい順に並べた一覧です。アイドル名をクリックすると、そのアイドルが登場するコミュに絞り込めます。</p>
+    </div>
+    <div class="stamp" id="stamp">読み込み中…</div>
+  </header>
+
+  <div class="rail" role="search">
+    <div class="row has-dd">
+      <label class="search" for="q"><svg viewBox="0 0 24 24" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <input id="q" type="search" placeholder="アイドル名・カード名で検索" autocomplete="off"></label>
+      <details class="dd" id="charaDD"><summary><span class="v" id="charaSum">アイドル・ユニット：すべて</span><svg viewBox="0 0 24 24" stroke-width="2.4"><path d="m6 9 6 6 6-6"/></svg></summary><div class="panel wide" id="charaPanel"></div></details>
+      <select id="year" aria-label="実装年"><option value="">すべての年</option></select>
+      <select id="sort" aria-label="並び順"><option value="desc">新しい順</option><option value="asc">古い順</option><option value="mustdesc">必読度が高い順</option><option value="mustasc">必読度が低い順</option></select>
+    </div>
+    <div class="row" id="picked" hidden></div>
+    <div class="row" id="kinds"><span class="lbl">種別</span></div>
+    <div class="row" id="rars"><span class="lbl">レア</span></div>
+    <div class="row has-dd"><span class="lbl">区分</span>
+      <details class="dd" id="collDD"><summary><span class="v" id="collSum">すべて</span><svg viewBox="0 0 24 24" stroke-width="2.4"><path d="m6 9 6 6 6-6"/></svg></summary><div class="panel" id="colls"></div></details>
+    </div>
+    <div class="row">
+      <button class="chip" id="withUnit" aria-pressed="true" title="アイドルを選ぶとユニットのコミュも、ユニットを選ぶとメンバー個人のコミュも表示します">ユニットのコミュも含める</button>
+      <button class="chip" id="mustOnly" aria-pressed="false">必読度つきのみ</button>
+      <button class="reset" id="reset" type="button">条件をクリア</button>
+      <span class="count" id="count"></span>
+    </div>
+  </div>
+
+  <main class="ledger" id="list"><p class="empty">データを読み込んでいます…</p></main>
+  <button class="more" id="more" hidden>さらに表示</button>
+
+  <footer>出典：<a href="https://wikiwiki.jp/shinycolors/" target="_blank" rel="noopener">シャニマス攻略 Wiki*</a>（サポートアイドル一覧・プロデュースアイドル一覧）、区分・カード画像は<a href="https://brilliant.avalon-studio.work/" target="_blank" rel="noopener">BRILLI@NT</a>と<a href="https://imassc.gamedbs.jp/" target="_blank" rel="noopener">シャニマスギャラリー</a>。画像の権利はBANDAI NAMCO Entertainment Inc.に帰属します。コミュのあるカードのみを掲載しています。必読度は作成者の主観です。データは毎週日曜 23:59 に自動で更新されます。
+    <span class="contact">誤りの報告・ご連絡：<a href="mailto:lunasa0808@gmail.com">lunasa0808@gmail.com</a> ／ X <a href="https://x.com/lunasa726615" target="_blank" rel="noopener">@lunasa726615</a></span></footer>
+</div>
+
+<script src="assets/app.js?v=2026102502" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,184 @@
+/* シャニマスコミュ総覧 — スタイル
+   構成: 1.色と書体  2.全体  3.見出し  4.絞り込み欄  5.ドロップダウン  6.一覧  7.ページ下部  8.スマホ */
+
+/* ===== 1. 色と書体 ===================================================== */
+:root {
+  --bg: #f6f7fb; --surface: #ffffff; --ink: #1b1f33; --muted: #5d6380; --line: #dde0ec;
+  --accent: #2f4bd8; --accent-soft: #e6eafd; --chip-bg: #eef0f7;
+  /* 種別の色 */
+  --k-produce: #d1495b; --k-support: #1f8a8a; --k-event: #c4841d; --k-scenario: #6b6f85;
+  --f-display: "Zen Old Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --f-body: "Zen Kaku Gothic New", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+  --f-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #12141f; --surface: #1a1d2c; --ink: #e8eaf5; --muted: #9ba1bd; --line: #2c3047;
+    --accent: #8fa2ff; --accent-soft: #252c52; --chip-bg: #232740;
+    --k-produce: #ff7f8e; --k-support: #5fd0cf; --k-event: #f0b45a; --k-scenario: #a5a9c0;
+    color-scheme: dark;
+  }
+}
+
+/* ===== 2. 全体 ========================================================= */
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.6; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 20px; padding-block: 28px 64px; }
+input:focus-visible, select:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.empty { padding: 48px 0; text-align: center; color: var(--muted); }
+
+/* ===== 3. 見出し ======================================================= */
+header.mast {
+  display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 32px;
+  padding-bottom: 18px; border-bottom: 2px solid var(--ink);
+}
+h1 {
+  font-family: var(--f-display); font-weight: 900; font-size: clamp(28px, 5vw, 44px); line-height: 1.15;
+  margin: 0; letter-spacing: .02em; text-wrap: balance;
+}
+.sub { color: var(--muted); font-size: 13px; margin: 6px 0 0; }
+.stamp { font-family: var(--f-data); font-size: 12px; color: var(--muted); display: grid; gap: 2px; text-align: right; }
+.stamp b { color: var(--ink); font-weight: 500; }
+
+/* ===== 4. 絞り込み欄 =================================================== */
+.rail {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg);
+  padding-block: 14px 12px; border-bottom: 1px solid var(--line); display: grid; gap: 10px;
+}
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.lbl { font-size: 11px; letter-spacing: .12em; color: var(--muted); margin-right: 2px; }
+
+/* 検索・プルダウン */
+.search { flex: 1 1 260px; min-width: 0; position: relative; }
+.search input {
+  width: 100%; font: inherit; padding: 9px 12px 9px 34px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--surface); color: var(--ink);
+}
+.search svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); width: 15px; height: 15px; stroke: var(--muted); fill: none; }
+select {
+  font: inherit; font-size: 14px; padding: 8px 10px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--surface); color: var(--ink); max-width: 100%;
+}
+
+/* チップ（種別・レア・区分・アイドル） */
+.chip {
+  font: inherit; font-size: 13px; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line);
+  background: var(--surface); color: var(--muted); cursor: pointer; display: inline-flex; align-items: center; gap: 6px;
+}
+.chip[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--ink); }
+.chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c, var(--muted)); }
+.chip .n { font-family: var(--f-data); font-size: 11px; color: var(--muted); }
+.chip.uchip { font-weight: 700; }
+.chip.via { background: var(--accent-soft); border-color: var(--accent-soft); }  /* 選んだユニットのメンバー */
+
+/* 選択中のアイドルと「いずれか／全員」 */
+.pick {
+  display: inline-flex; align-items: center; gap: 4px; font-size: 13px; padding: 4px 6px 4px 12px; border-radius: 999px;
+  background: var(--accent-soft); border: 1px solid var(--accent); color: var(--ink);
+}
+.pick button { font: inherit; line-height: 1; border: 0; background: none; color: var(--muted); cursor: pointer; padding: 2px 6px; border-radius: 999px; }
+.pick button:hover { color: var(--ink); background: var(--chip-bg); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.seg button { font: inherit; font-size: 12px; padding: 4px 10px; border: 0; background: var(--surface); color: var(--muted); cursor: pointer; }
+.seg button[aria-pressed="true"] { background: var(--accent-soft); color: var(--ink); }
+
+/* 件数・クリア */
+.count { font-family: var(--f-data); font-size: 13px; color: var(--muted); margin-left: auto; }
+.count b { color: var(--ink); font-size: 15px; }
+.reset { font: inherit; font-size: 13px; background: none; border: 0; color: var(--accent); cursor: pointer; padding: 4px; }
+
+/* ===== 5. ドロップダウン（アイドル・ユニット／区分） ================== */
+.row.has-dd { position: relative; }        /* パネルはこの行の左端を基準に開く */
+.dd { position: static; }
+.dd summary {
+  list-style: none; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-size: 13px;
+  padding: 5px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); user-select: none;
+}
+.dd summary::-webkit-details-marker { display: none; }
+.dd summary .v { color: var(--muted); max-width: 40ch; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dd summary .v.on { color: var(--accent); }
+.dd summary svg { width: 12px; height: 12px; stroke: currentColor; fill: none; transition: transform .15s; }
+.dd[open] summary svg { transform: rotate(180deg); }
+.dd .panel {
+  position: absolute; z-index: 20; top: calc(100% + 6px); left: 0; width: min(560px, 100%);
+  display: flex; flex-wrap: wrap; gap: 6px; padding: 12px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 8px 24px rgba(20, 24, 50, .14);
+}
+.dd .panel.wide { width: min(760px, 100%); flex-direction: column; flex-wrap: nowrap; gap: 8px; max-height: min(60vh, 520px); overflow: auto; }
+.grp { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.glbl { flex: 0 0 100%; font-size: 11px; letter-spacing: .1em; color: var(--muted); }
+.ddfoot { display: flex; justify-content: flex-end; gap: 12px; border-top: 1px solid var(--line); padding-top: 8px; }
+
+/* ===== 6. 一覧 ========================================================= */
+.ledger { margin-top: 8px; }
+
+/* 月（または必読度）の区切り */
+.month { display: flex; align-items: baseline; gap: 12px; margin: 22px 0 6px; }
+.month h2 { font-family: var(--f-display); font-weight: 600; font-size: 18px; margin: 0; }
+.month span { font-family: var(--f-data); font-size: 12px; color: var(--muted); }
+.month::after { content: ""; flex: 1; border-bottom: 1px solid var(--line); }
+
+/* 1件：日付 | 画像 | 本文 | バッジ */
+.item {
+  display: grid; grid-template-columns: 6.6em 128px 1fr auto; gap: 4px 16px; align-items: center;
+  padding: 10px 4px; border-bottom: 1px solid var(--line);
+}
+.item .d { font-family: var(--f-data); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.item .card { min-width: 0; }
+
+/* 画像（スプライトの一部を背景として表示） */
+.th { display: block; width: 128px; max-width: 100%; aspect-ratio: 16 / 9; border-radius: 6px; background-color: var(--chip-bg); background-repeat: no-repeat; }
+.th.none { background: transparent; border: 1px dashed var(--line); }
+
+/* 登場アイドルのタグ */
+.tgs { display: flex; flex-wrap: wrap; gap: 4px 6px; margin-bottom: 2px; }
+.tg { font: inherit; font-size: 13px; font-weight: 700; padding: 0 2px; border: 0; background: none; color: var(--ink); cursor: pointer; border-bottom: 1px dotted var(--line); }
+.tg:hover { color: var(--accent); border-bottom-color: var(--accent); }
+.tg.unit { font-weight: 500; color: var(--muted); }
+.tg.on { color: var(--accent); border-bottom: 1px solid var(--accent); }
+
+/* カード名・区分 */
+.item .card .nm { font-size: 15.5px; }
+.item .card .nm::before { content: "【"; color: var(--muted); }
+.item .card .nm::after { content: "】"; color: var(--muted); }
+.card .sub2 { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; margin-top: 3px; }
+.coll { font-size: 12px; padding: 1px 8px; border-radius: 4px; background: var(--accent-soft); color: var(--ink); white-space: nowrap; }
+
+/* 右端のバッジ：必読度・レア・種別 */
+/* 3列の固定幅にそれぞれ中央寄せで置く：必読度 | レア | 種別 */
+.tags { display: grid; grid-template-columns: 5.6em 3.2em 11.6em; gap: 6px; align-items: center; justify-items: center; font-size: 12px; }
+.must { font-size: 1em; letter-spacing: 1px; color: var(--k-event); white-space: nowrap; }
+.must i { font-style: normal; color: var(--line); }
+.rar { font-family: var(--f-data); font-size: .92em; font-weight: 500; padding: 1px 6px; border-radius: 4px; background: var(--chip-bg); color: var(--ink); }
+.kind { font-size: 1em; padding: 1px 8px; border-radius: 4px; color: var(--c); border: 1px solid var(--c); white-space: nowrap; }
+
+.more {
+  display: block; margin: 20px auto 0; font: inherit; padding: 10px 22px; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer;
+}
+
+/* ===== 7. ページ下部 =================================================== */
+footer { margin-top: 40px; font-size: 12px; color: var(--muted); }
+footer a { color: var(--accent); }
+footer .contact { display: block; margin-top: 6px; }
+
+/* ===== 8. スマホ ======================================================= */
+@media (max-width: 720px) {
+  .stamp { text-align: left; }
+  .rail { position: static; }               /* 絞り込み欄が画面を覆わないように固定しない */
+  .chip { font-size: 12px; padding: 4px 10px; }
+  .count { margin-left: 0; width: 100%; }
+
+  /* 1件：画像を左に、日付・本文・バッジを右に縦に並べる */
+  .item { grid-template-columns: 104px 1fr; gap: 2px 12px; align-items: start; }
+  .th { width: 104px; }
+  .item .th { grid-column: 1; grid-row: 1 / span 3; }
+  .item .d { grid-column: 2; grid-row: 1; }
+  .item .tags { grid-column: 2 / -1; grid-row: 3; justify-self: start; margin-top: 4px; font-size: 11px; }   /* バッジは本文の下に */
+  .item .d { font-size: 12px; }
+  .item .card { grid-column: 2 / -1; grid-row: 2; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dd summary svg { transition: none; }
+}
