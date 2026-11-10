@@ -1,0 +1,5 @@
+work/
+__pycache__/
+scripts/ocr/node_modules/
+scripts/ocr/.cache/
+extension/lib/

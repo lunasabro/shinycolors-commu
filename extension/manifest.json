@@ -1,0 +1,14 @@
+{
+  "manifest_version": 3,
+  "name": "コミュ記録（光空記録総覧）",
+  "version": "0.2.3",
+  "description": "シャニマスのコミュを読みながら、画面に出た台詞とタイトルを記録して、ダウンロードフォルダの「コミュログ」に保存します。自分用。ゲームの操作はしません。",
+  "permissions": ["activeTab", "downloads", "downloads.ui", "offscreen", "storage"],
+  "host_permissions": ["https://shinycolors.enza.fun/*"],
+  "action": { "default_popup": "popup.html", "default_title": "コミュ記録" },
+  "background": { "service_worker": "background.js" },
+  "commands": {
+    "toggle": { "suggested_key": { "default": "Ctrl+Shift+9" }, "description": "記録の開始・停止" }
+  },
+  "content_security_policy": { "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'" }
+}

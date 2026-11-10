@@ -1,0 +1,9 @@
+{
+  "name": "commu-ocr",
+  "private": true,
+  "description": "コミュのログ画像から台詞を読み取る（scripts/commu_text.py から呼ぶ）",
+  "dependencies": {
+    "tesseract.js": "5.1.1",
+    "@tesseract.js-data/jpn": "1.0.0"
+  }
+}

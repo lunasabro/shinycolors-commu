@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ja">
+<meta charset="utf-8">
+<style>
+  body { font: 13px/1.6 system-ui, "Yu Gothic UI", sans-serif; width: 320px; margin: 0; padding: 12px; color: #1d1a22; }
+  h1 { font-size: 14px; margin: 0 0 6px; }
+  .st { color: #6a6572; margin: 0 0 10px; }
+  .st.on::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #e0457b; margin-right: 6px; }
+  label { display: block; font-size: 12px; color: #6a6572; }
+  input { width: 100%; box-sizing: border-box; font: inherit; padding: 4px 6px; border: 1px solid #ccc; border-radius: 3px; margin: 2px 0 8px; }
+  .row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+  button { font: inherit; padding: 4px 10px; border: 1px solid #1d1a22; border-radius: 3px; background: #fff; cursor: pointer; }
+  button.main { background: #1d1a22; color: #fff; }
+  ol { margin: 0; padding-left: 1.4em; color: #444; font-size: 12px; max-height: 9.6em; overflow: auto; }
+  .hint { font-size: 11px; color: #6a6572; margin-top: 8px; }
+</style>
+<h1>コミュ記録</h1>
+<p class="st" id="st">…</p>
+<label for="title">タイトル（違っていたら直す）</label>
+<input id="title" autocomplete="off">
+<div class="row">
+  <button class="main" id="toggle">記録を始める</button>
+  <button id="save">今の分を保存</button>
+  <button id="new">次のコミュへ</button>
+</div>
+<label style="display:flex;gap:6px;align-items:center;color:#1d1a22"><input type="checkbox" id="debug" style="width:auto;margin:0">読み取った場所の画像も保存する（調整用）</label>
+<label>最近の台詞（<span id="n">0</span>行）</label>
+<ol id="lines"></ol>
+<p class="hint">シャニマスのタブで「記録を始める」を押して、そのまま読み進めてください（ゲームのオートでも可、早送りは不可）。台詞が30秒増えないか、次のコミュのタイトルが出たら、ダウンロードの「コミュログ」フォルダに保存します。ショートカット：Ctrl+Shift+9</p>
+<script src="popup.js"></script>
+</html>

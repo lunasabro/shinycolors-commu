@@ -1,0 +1,6 @@
+{
+ "_comment": "自動ルールで決まらない画像の手動指定。キーは「種別|名前|実装日」、値は画像に使うカードページURL。",
+ "event_images": {
+  "イベントシナリオ|ミッション・コンプリート!|2021-04-20": "https://brilliant.avalon-studio.work/houkago-climax-girls/chiyoko/code-SH%E2%98%86%E2%98%86TING-star.html"
+ }
+}
